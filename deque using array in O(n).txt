@@ -1,3 +1,5 @@
+// implement deque using Array
+
 import java.util.*;
 class Deque
 {
