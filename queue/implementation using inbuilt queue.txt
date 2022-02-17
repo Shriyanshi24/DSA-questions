@@ -1,0 +1,20 @@
+import java.util.*;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        Queue<Integer> q=new LinkedList<Integer>();
+        
+        for(int i=1;i<=5;i++)
+        {
+            q.add(i);
+        }
+        System.out.println("Queue elements are: "+q);
+        System.out.println("element present at head: "+q.peek());
+        System.out.println("dequeued element is: "+q.remove());
+        System.out.println("Queue elements are: "+q);
+        System.out.println("size of queue is: "+q.size());
+	System.out.println("is queue empty: "+q.isEmpty());
+    }
+}

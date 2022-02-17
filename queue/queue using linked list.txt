@@ -1,0 +1,70 @@
+import java.util.*;
+class ListNode
+{
+    int data;
+    ListNode next;
+    
+    public ListNode(int data)
+    {
+        this.data=data;
+        this.next=null;
+    }
+}
+class Queue
+{
+    ListNode front=null;
+    ListNode rear=null;
+    int length=0;
+    
+    public int size()
+    {
+        return length;
+    }
+    public boolean isEmpty()
+    {
+        return length==0;
+    }
+    
+    public void enQueue(int data)
+    {
+        ListNode newnode=new ListNode(data);
+        if(front==null && rear==null)
+            front=rear=newnode;
+        
+        else
+        {
+            rear.next=newnode;
+            rear=newnode;
+        }
+        length++;
+    }
+    
+    public int deQueue()
+    {
+        if(front==null)
+        {
+            System.out.println("undeflow");
+            return -1;
+        }
+        int data=front.data;
+        front=front.next;
+        return data;
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+	    Scanner sc=new Scanner(System.in);
+	    Queue q=new Queue();
+	    q.enQueue(10);
+	    q.enQueue(20);
+	    q.enQueue(30);
+	    q.enQueue(40);
+	    q.enQueue(50);
+	    
+	    for(int i=0;i<q.size();i++)
+		System.out.println(q.deQueue());
+	}
+}

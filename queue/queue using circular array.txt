@@ -1,0 +1,100 @@
+import java.util.*;
+class Queue
+{
+    int queue[];
+    int capacity;
+    int front,rear,size;
+    
+    public Queue(int cap)
+    {
+        queue=new int[cap];
+        capacity=cap;
+        front=rear=-1;
+        size=0;
+    }
+    
+    public void enQueue(Queue q,int data)
+    {
+        // if queue is full we will check if there is any free slot or not
+        // if no free slot then overflow condition is there
+        if((rear+1)%capacity==front)
+        {
+            System.out.println("queue is full");
+        }
+        // if no element in queue is there
+        else if(front==-1 && rear==-1)
+        {
+            front++;
+            rear++;
+            queue[rear]=data;
+        }
+        // if some free slots are there
+        else
+        {
+            rear=(rear+1)%capacity;
+            queue[rear]=data;
+        }
+        size++;
+    }
+    
+    public void deQueue(Queue q)
+    {
+        // if queue is empty
+        if(front==-1 && rear==-1)
+        {
+            System.out.println("queue is empty");
+        }
+        // if only 1 element is left in queue
+        else if(front==rear)
+        {
+            int data=queue[front];
+            front=rear=-1;
+            System.out.println("dequeued element: "+data);
+        }
+        // if elements are present in queue 
+        else
+        {
+            int data=queue[front];
+            front=(front+1)%capacity;
+            System.out.println("dequeued element: "+data);
+        }
+    }
+    public void display(Queue q)
+    {
+        int i=front;
+        while(i!=rear)
+        {
+            System.out.print(i+" "+queue[i]+" ");
+            i=(i+1)%capacity;
+        }
+        System.out.print(i+" "+queue[i]+" ");
+        System.out.println();
+    }
+}
+public class Main
+{
+	public static void main(String[] args)
+	{
+	    Scanner sc=new Scanner(System.in);
+	    Queue q=new Queue(5);
+	    q.enQueue(q,10);
+	    q.enQueue(q,20);
+	    q.enQueue(q,30);
+	    q.enQueue(q,40);
+	    q.enQueue(q,50);
+	    q.display(q);
+	    
+	    q.deQueue(q);
+	    q.deQueue(q);
+	    
+	    q.display(q);
+	    
+	    q.enQueue(q,60);
+	    q.enQueue(q,70);
+	    q.display(q);
+	    
+	    q.enQueue(q,70);
+	    
+	    
+	}
+}
