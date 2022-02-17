@@ -1,0 +1,85 @@
+import java.util.*;
+class Node
+{
+    int data;
+    Node prev;
+    Node next;
+    public Node(int data)
+    {
+        this.data=data;
+        this.next=null;
+    }
+}
+class CLL
+{
+    public void print(Node head)
+    {
+        Node curr=head;
+        while(curr.next!=head)
+        {
+            System.out.print(curr.data+"->");
+            curr=curr.next;
+        }
+        System.out.print(curr.data);
+        System.out.println();
+    }
+    
+    // insert at beginnning
+    public Node insertAtBeg(Node head,int data)
+    {
+        Node newnode=new Node(data);
+        if(head==null)
+        {
+            head=newnode;
+            newnode.next=head;
+            return head;
+        }
+        Node tail=head;
+        while(tail.next!=head)
+        {
+            tail=tail.next;
+        }
+        newnode.next=tail.next;
+        tail.next=newnode;
+        head=newnode;
+        return head;
+    }
+    
+    // insert at end
+    public Node insertAtEnd(Node head,int data)
+    {
+        Node newnode=new Node(data);
+        Node tail=head;
+        while(tail.next!=head)
+        {
+            tail=tail.next;
+        }
+        newnode.next=tail.next;
+        tail.next=newnode;
+        return head;
+    }
+}
+public class Main
+{
+	public static void main(String[] args) 
+	{
+	    Scanner s=new Scanner(System.in);
+	    int n=s.nextInt();
+	    CLL ll=new CLL();
+	    Node head=new Node(s.nextInt());
+	    Node tail=head;
+	    while(n!=1)
+	    {
+	        tail.next=new Node(s.nextInt());
+	        tail=tail.next;
+	        n--;
+	    }
+	    tail.next=head;
+	    ll.print(head);
+	    head=ll.insertAtBeg(head,10);
+	    ll.print(head);
+	    
+	    head=ll.insertAtEnd(head,50);
+	    ll.print(head);
+	}
+}

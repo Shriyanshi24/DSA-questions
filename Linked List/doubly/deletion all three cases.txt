@@ -1,0 +1,106 @@
+import java.util.*;
+class Node
+{
+    int data;
+    Node prev;
+    Node next;
+    
+    public Node(int data)
+    {
+        this.data=data;
+        this.prev=null;
+        this.next=null;
+    }
+}
+class LL
+{
+    public void print(Node head)
+    {
+        Node curr=head;
+        while(curr!=null)
+        {
+            System.out.print(curr.data+"->");
+            curr=curr.next;
+        }
+        System.out.print("null");
+        System.out.println();
+    }
+    
+    // deletion at beginning
+    public Node deleteAtBeg(Node head)
+    {
+        Node temp=head;
+        head=head.next;
+        head.prev=null;
+        temp.next=null;
+        return head;
+    }
+    
+    // deletion at last
+    public Node deleteAtEnd(Node head)
+    {
+        if(head==null)
+        {
+            return null;
+        }
+        Node prev=null;
+        Node curr=head;
+        while(curr.next!=null)
+        {
+            prev=curr;
+            curr=curr.next;
+        }
+        prev.next=null;
+        curr.prev=null;
+        return head;
+    }
+    
+    // deletion at middle
+    public Node deleteAtMid(Node head,int pos)
+    {
+        int count=1;
+        Node prev=null;
+        Node curr=head;
+        while(count<pos)
+        {
+            prev=curr;
+            curr=curr.next;
+            count++;
+        }
+        prev.next=curr.next;
+        curr.next.prev=prev;
+        curr.next=null;
+        curr.prev=null;
+        return head;
+    }
+    
+}
+public class Main
+{
+	public static void main(String[] args)
+	{
+	    Scanner s=new Scanner(System.in);
+	    LL ll=new LL();
+	    int n=s.nextInt();
+	    Node head=new Node(s.nextInt());
+	    Node tail=head;
+	    while(n!=1)
+	    {
+	        tail.next=new Node(s.nextInt());
+	        tail.next.prev=tail;
+	        tail=tail.next;
+	        n--;
+	    }
+	    ll.print(head);
+	    
+	    head=ll.deleteAtBeg(head);
+	    ll.print(head);
+	    
+	    head=ll.deleteAtEnd(head);
+	    ll.print(head);
+	    
+	    head=ll.deleteAtMid(head,4);
+	    ll.print(head);
+	   
+	}
+}

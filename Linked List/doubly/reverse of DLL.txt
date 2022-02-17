@@ -1,0 +1,67 @@
+import java.util.*;
+class Node
+{
+    int data;
+    Node next;
+    Node prev;
+    
+    public Node(int data)
+    {
+        this.data=data;
+        this.next=null;
+        this.prev=null;
+    }
+}
+class DLL
+{
+    public void print(Node head)
+    {
+        Node curr=head;
+        while(curr!=null)
+        {
+            System.out.print(curr.data+"->");
+            curr=curr.next;
+        }
+        System.out.print("null");
+        System.out.println();
+    }
+    
+    public Node reverse(Node head)
+    {
+        Node prev=null;
+        Node curr=head;
+        Node next;
+        while(curr!=null)
+        {
+            next=curr.next;
+            curr.next=prev;
+            curr.prev=next;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+	    Scanner s=new Scanner(System.in);
+	    DLL ll=new DLL();
+	    int n=s.nextInt();
+	    Node head=new Node(s.nextInt());
+	    Node tail=head;
+	    while(n!=1)
+	    {
+	        tail.next=new Node(s.nextInt());
+	        tail.next.prev=tail;
+	        tail=tail.next;
+	        n--;
+	    }
+	    ll.print(head);
+	    System.out.println("REVERSED DLL IS: ");
+	    head=ll.reverse(head);
+	    ll.print(head);
+	}
+}
