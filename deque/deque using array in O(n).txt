@@ -1,0 +1,73 @@
+import java.util.*;
+class Deque
+{
+	int size;
+	int capacity;
+	int dq[];
+	public Deque(int cap)
+	{
+		dq=new int[cap];
+		capacity=cap;
+		size=0;
+	}
+	public void insertFront(int data)
+	{
+		if(isFull())
+			System.out.println("deque overflow");
+
+		for(int i=size-1;i>=0;i--)
+			dq[i+1]=dq[i];
+		dq[0]=data;
+		size++;
+	}
+	public int deleteFront()
+	{
+		if(isEmpty())
+			System.out.println("Deque underflow");
+
+		int data=dq[0];
+		for(int i=0;i<size-1;i++)
+			dq[i]=dq[i+1];
+		size--;
+		return data;
+	}
+	public void insertRear(int data)
+	{
+		if(isFull())
+			System.out.println("deque overflow");
+		
+		dq[size]=data;
+		size++;
+	}
+	public int deleteRear()
+	{
+		if(isEmpty())
+			System.out.println("deque underflow");
+		int data=dq[size];
+		size--;
+		return data;
+	}
+	public boolean isEmpty()
+	{
+		return size==0;
+	}
+	public boolean isFull()
+	{
+		return size==capacity;
+	}
+}
+public class Main
+{
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		Deque dq=new Deque(10);
+		dq.insertRear(10);
+		dq.insertFront(20);
+		dq.insertRear(30);
+		dq.insertFront(40);
+		System.out.println("front element to be deleted is: "+dq.deleteFront());
+		System.out.println("rear element to be deleted is: "+dq.deleteRear());
+
+	}
+}
